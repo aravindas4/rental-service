@@ -25,15 +25,15 @@ class StationSerializer(serializers.HyperlinkedModelSerializer):
             'origin_for_rents',
             'destination_for_rents',)
 
-    def validate(self, data):
-        name = data.get('name', None)
-        if name and Station.objects.filter(name=name).exists():
-            raise serializers.ValidationError({"Station":"Name already exists.Please give different one."})
-        # latitude = data.get('latitude', None)
-        # longitude = data.get('longitude', None)
-        # if latitude and longitude and Station.objects.filter(latitude=latitude, longitude=longitude).exists():
-        #     raise serializers.ValidationError({"Station":"LL already exists.Please give different LLs."})
-        return data
+    # def validate(self, data):
+    #     name = data.get('name', None)
+    #     if name and Station.objects.filter(name=name).exists():
+    #         raise serializers.ValidationError({"Station":"Name already exists.Please give different one."})
+    #     # latitude = data.get('latitude', None)
+    #     # longitude = data.get('longitude', None)
+    #     # if latitude and longitude and Station.objects.filter(latitude=latitude, longitude=longitude).exists():
+    #     #     raise serializers.ValidationError({"Station":"LL already exists.Please give different LLs."})
+    #     return data
 
 class RentSerializer(serializers.HyperlinkedModelSerializer):
     origin_station = serializers.SlugRelatedField(queryset=Station.objects.all(), slug_field='name')
@@ -49,11 +49,12 @@ class RentSerializer(serializers.HyperlinkedModelSerializer):
             'is_active',)
         read_only_fields = ('is_active',)
 
-    def validate(self, data):
-        enddate = data.get('enddate', None)
-        startdate = data.get('startdate', None)
-        buffer_time = 600.0
-        if enddate:
-            if startdate and startdate > enddate:
-                raise serializers.ValidationError({"Rent":"Startdate is greater than Enddate."})
-        return data
+    # def validate(self, data):
+    #     import pdb; pdb.set_trace()
+    #     enddate = data.get('enddate', None)
+    #     startdate = data.get('startdate', None)
+    #     buffer_time = 600.0
+    #     if enddate:
+    #         if startdate and startdate > enddate:
+    #             raise serializers.ValidationError({"Rent":"Startdate is greater than Enddate."})
+    #     return data

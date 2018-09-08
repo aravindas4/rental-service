@@ -25,7 +25,7 @@ SECRET_KEY = '$vx0s3(i!9n%kulfo-g*k($!c(ew5%l@3%*+znc&rf+!3ixxt1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'bike_rental',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,16 @@ DATABASES = {
     }
 }
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+    'bike_rental.custompagination.LimitOffsetPaginationWithUpperBound',
+    'PAGE_SIZE': 4,
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+        ),
+ }
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 

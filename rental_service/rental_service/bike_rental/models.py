@@ -11,7 +11,7 @@ class Base(models.Model):
 	modified = models.DateTimeField(auto_now=True)
 
 class Station(Base):
-	name                    = models.CharField(max_length=20)
+	name                    = models.CharField(max_length=20, unique=True)
 	latitude                = models.IntegerField(default=0)
 	longitude               = models.IntegerField(default=0)
 	bike_available_quantity = models.IntegerField(default=0)
@@ -38,6 +38,7 @@ class Rent(Base):
 		super(Rent, self).__init__(*args, **kwargs)
 
 	def save(self, *args, **kwargs):
+		import pdb; pdb.set_trace()
 		if not self.id:
 			self.is_active = True
 			self.enddate = None

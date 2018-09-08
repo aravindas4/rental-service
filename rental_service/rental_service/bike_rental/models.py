@@ -26,7 +26,7 @@ class Station(Base):
 class Rent(Base):
 	origin_station          = models.ForeignKey(Station,on_delete=models.CASCADE, related_name="origin_for_rents")
 	destination_station     = models.ForeignKey(Station,on_delete=models.CASCADE, related_name="destination_for_rents")
-	startdate               = models.DateTimeField(default=datetime.now)
+	startdate               = models.DateTimeField()
 	enddate                 = models.DateTimeField(null=True)
 	is_active               = models.BooleanField(default=False)
 
@@ -38,7 +38,7 @@ class Rent(Base):
 		super(Rent, self).__init__(*args, **kwargs)
 
 	def save(self, *args, **kwargs):
-		import pdb; pdb.set_trace()
+		#import pdb; pdb.set_trace()
 		if not self.id:
 			self.is_active = True
 			self.enddate = None

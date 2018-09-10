@@ -40,7 +40,7 @@ class Rent(Base):
 	def save(self, *args, **kwargs):
 		#import pdb; pdb.set_trace()
 		if not self.id:
-			self.is_active = True
+			#self.is_active = True
 			self.enddate = None
 			self.origin_station.bike_available_quantity -=1
 			self.origin_station.save()

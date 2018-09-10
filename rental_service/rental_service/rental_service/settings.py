@@ -99,8 +99,8 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '3/hour',
         'user': '10/hour',
-        'stations': '4/hour',
-        'rents': '20/hour',
+        'stations': '4000/hour',
+        'rents': '4000/hour',
     }
  }
 # Password validation

@@ -19,3 +19,5 @@ Each user can only rent one bike at a time.
 The user can see the history of their rentals, including the current active rental (if one exists). The history of rentals includes rental start dates and end dates.
 After a rental, the user can change the destination station through the app. However, this change is allowed only during the first 10 minutes after the rent.
 The user can also cancel the current active rental within 10 minutes. After canceling, the user must return the bike to the same station it was taken from.
+
+python_files = tests.py test_*.py *_tests.py

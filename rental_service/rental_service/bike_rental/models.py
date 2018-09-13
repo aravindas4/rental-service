@@ -34,13 +34,13 @@ class Rent(Base):
 		db_table            = "rent"
 
 	def __init__(self, *args, **kwargs):
-		self.is_active = True
+		#self.is_active = True
 		super(Rent, self).__init__(*args, **kwargs)
 
 	def save(self, *args, **kwargs):
 		#import pdb; pdb.set_trace()
 		if not self.id:
-			#self.is_active = True
+			self.is_active = True
 			self.enddate = None
 			self.origin_station.bike_available_quantity -=1
 			self.origin_station.save()
@@ -55,4 +55,5 @@ class Rent(Base):
 def rent_post_delete(sender, instance, **kwargs):
 	if instance.is_active:
 		instance.origin_station.bike_available_quantity +=1
+		instance.is_active = False
 		instance.origin_station.save()

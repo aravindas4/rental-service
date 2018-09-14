@@ -51,9 +51,16 @@ class Rent(Base):
 				self.destination_station.save()
 		super(Rent, self).save(*args, **kwargs)
 
-@receiver(post_delete, sender=Rent)
-def rent_post_delete(sender, instance, **kwargs):
-	if instance.is_active:
-		instance.origin_station.bike_available_quantity +=1
-		instance.is_active = False
-		instance.origin_station.save()
+	def delete(self, *args, **kwargs):
+		if self.is_active:
+			self.origin_station.bike_available_quantity +=1
+			self.is_active = False
+			self.origin_station.save()
+		super(Rent, self).save(*args, **kwargs)
+
+# @receiver(post_delete, sender=Rent)
+# def rent_post_delete(sender, instance, **kwargs):
+# 	if instance.is_active:
+# 		instance.origin_station.bike_available_quantity +=1
+# 		instance.is_active = False
+# 		instance.origin_station.save()

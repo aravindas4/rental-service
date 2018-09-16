@@ -1,6 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_save, pre_save, post_delete
+from django.db.models.signals import post_save, pre_save, pre_delete
 from datetime import datetime
 # Create your models here.
 
@@ -58,7 +58,7 @@ class Rent(Base):
 			self.origin_station.save()
 		super(Rent, self).save(*args, **kwargs)
 
-# @receiver(post_delete, sender=Rent)
+# @receiver(pre_delete, sender=Rent)
 # def rent_post_delete(sender, instance, **kwargs):
 # 	if instance.is_active:
 # 		instance.origin_station.bike_available_quantity +=1

@@ -25,7 +25,7 @@ SECRET_KEY = '$vx0s3(i!9n%kulfo-g*k($!c(ew5%l@3%*+znc&rf+!3ixxt1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1','testserver']
 
 
 # Application definition

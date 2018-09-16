@@ -49,12 +49,10 @@ class RentSerializer(serializers.HyperlinkedModelSerializer):
             'is_active',)
         read_only_fields = ('is_active',)
 
-    # def validate(self, data):
-    #     import pdb; pdb.set_trace()
-    #     enddate = data.get('enddate', None)
-    #     startdate = data.get('startdate', None)
-    #     buffer_time = 600.0
-    #     if enddate:
-    #         if startdate and startdate > enddate:
-    #             raise serializers.ValidationError({"Rent":"Startdate is greater than Enddate."})
-    #     return data
+    def validate(self, data):
+        enddate = data.get('enddate', None)
+        startdate = data.get('startdate', None)
+        if enddate:
+            if startdate and startdate > enddate:
+                raise serializers.ValidationError({"Rent":"Startdate is greater than Enddate."})
+        return data

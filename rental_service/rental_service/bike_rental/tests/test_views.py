@@ -60,15 +60,15 @@ class StationTests(APITestCase):
         assert response.status_code == 400
         Station.objects.all().order_by('-id').first().delete()
 
-        def test_station_creation2(self):
-            data =  {'name':'Other city245',
-                        'latitude':971,
-                        'longitude':908,
-                        'bike_available_quantity':90}
-            response = self.client.post(self.uri, data)
-            response = self.client.post(self.uri, data)
-            assert response.status_code == 400
-            Station.objects.all().order_by('-id').first().delete()
+    # def test_station_creation2(self):
+    #     data =  {'name':'Other city245',
+    #                 'latitude':971,
+    #                 'longitude':908,
+    #                 'bike_available_quantity':90}
+    #     response = self.client.post(self.uri, data)
+    #     response = self.client.post(self.uri, data)
+    #     assert response.status_code == 400
+    #     Station.objects.all().order_by('-id').first().delete()
 
 class RentTests(APITestCase):
     @classmethod
@@ -113,7 +113,14 @@ class RentTests(APITestCase):
         assert response.status_code == 201
         Rent.objects.all().order_by('-id').first().delete()
 
-    def test_rent_updating(self):
-        response = self.client.patch(self.uri, {'pk':self.rent.id, 'enddate':datetime.now()})
-        assert response.status_code == 201
-        Rent.objects.all().order_by('-id').first().delete()
+    def test_rent_updating_and_deleting(self):
+        data1 =  {
+        # 'origin_station':self.city1,
+        #             'destination_station':self.city2,
+        #             'startdate':datetime.now(),
+                    'enddate':datetime.now()}
+        response = self.client.patch(self.uri+str(self.rent.id)+'/', data=data1)
+        assert response.status_code == 200
+        #Rent.objects.all().order_by('-id').first().delete()
+        response = self.client.delete(self.uri+str(self.rent.id)+'/', format="json")
+        assert response.status_code == 204
